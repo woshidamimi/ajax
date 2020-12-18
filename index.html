@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="btn">点我获取内容</button>
+    <p>通过ajax获取到的内容</p>
+    <div id="content">
+
+    </div>
+</body>
+
+</html>
+<script>
+
+    function myAjax() {
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = () => {
+
+            if (xhr.readyState == 4 && xhr.status == 200) {
+
+                const xhrObj = JSON.parse(xhr.responseText)
+                console.log(xhrObj.msg)
+                content.innerHTML = xhrObj.msg;
+            } else{
+                console.log('请求失败')
+            }
+        }
+
+        xhr.open('get', './json/data.json', true);
+        xhr.send();
+    }
+    btn.addEventListener('click', myAjax);
+</script>
